@@ -1,0 +1,120 @@
+/******************************************************************************/
+
+body {
+	margin: 0;
+	height: 100%;
+	font-family: 'Roboto Condensed', sans-serif;
+}
+
+/******************************************************************************/
+
+#toolbar {
+	display: grid;
+	grid-template-columns: auto auto;
+	padding: 4px;
+	background-color: #ffeaae;
+	border-style: none none solid none;
+	border-width: 2px;
+	border-color: grey;
+}
+
+#toolbar div {
+	display: inline-block;
+}
+
+#toolbarLeft {
+	text-align: left;
+}
+
+#toolbarLeft:before {
+	content: '\200B';
+}
+
+#toolbarRight {
+	text-align: right;
+}
+
+#toolbarRight:after {
+	content: '\200B';
+}
+
+/******************************************************************************/
+
+#ribbon {
+	display: grid;
+	grid-template-columns: auto auto;
+	padding: 4px;
+	background-color: #ffeaae;
+	border-style: solid none none none;
+	border-width: 2px;
+	border-color: grey;
+}
+
+#ribbon div {
+	display: inline-block;
+}
+
+#ribbonLeft {
+	text-align: left;
+}
+
+#ribbonLeft:before {
+	content: '\200B';
+}
+
+#ribbonRight {
+	text-align: right;
+}
+
+#toolbarRight:after {
+	content: '\200B';
+}
+
+/******************************************************************************/
+
+.tab {
+	margin: 0 4px;
+}
+
+.tab:before {
+	content: '[';
+	margin-right: 2px;
+}
+
+.tab:after {
+	content: ']';
+	margin-left: 2px;
+}
+
+/******************************************************************************/
+
+#ofelimo {
+	position: relative;
+	background-color: #e7fffe;
+}
+
+/******************************************************************************/
+
+.forma {
+	display: inline-block;
+	margin: 8px;
+	padding: 8px;
+
+	background-color: cornsilk;
+	box-shadow: 2px 2px 6px #888888;
+
+	border-style: solid;
+	border-width: 1px;
+	border-color: #000000;
+	border-radius: 4px;
+}
+
+.prompt {
+	display: inline-block;
+	text-align: right;
+	margin-right: 4px;
+}
+
+.prompt:after {
+	content: ':';
+}

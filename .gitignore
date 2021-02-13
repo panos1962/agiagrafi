@@ -1,0 +1,4 @@
+*.swp
+local/*
+!local/README.txt
+panos[0-9]*
