@@ -8,12 +8,25 @@ Show.autoplay = true;
 Selida.init = function() {
 	Selida.arxikiTabDOM.remove();
 	Show.panelSetup();
-	Selida.ofelimoDOM.on('click', '.edafioEdafio', function(e) {
+	Selida.ofelimoDOM.
+	on('click', '.edafioEdafio', function(e) {
 		e.stopPropagation();
 		e.preventDefault();
 
 		clearTimeout($(this).data('timer'));
 		$(this).stop().fadeTo(50, 1);
+	}).
+	on('click', '.biblioBiblio', function(e) {
+		e.stopPropagation();
+		e.preventDefault();
+
+		Show.kefaleaToggle($(this));
+	}).
+	on('click', '.kefaleo', function(e) {
+		e.stopPropagation();
+		e.preventDefault();
+
+		Show.edafiaToggle($(this));
 	});
 	Show.edafioStinTixi();
 };
@@ -145,7 +158,10 @@ Show.booksIndexDisplay = function(data) {
 	data.forEach(function(x) {
 		const dom = (new Biblio(x)).domGet();
 
-		Selida.ofelimoDOM.append(dom);
+		Selida.ofelimoDOM.
+		append($('<div>').
+		append(dom).
+		append($('<dom>').addClass('kefalea')));
 
 		const w = dom.innerWidth();
 
@@ -154,6 +170,7 @@ Show.booksIndexDisplay = function(data) {
 	});
 
 	Selida.ofelimoDOM.
+	children().
 	children('.biblioBiblio').
 	css({
 		'width': wmax + 'px',
@@ -180,3 +197,112 @@ Show.booksIndexOff = function() {
 };
 
 ///////////////////////////////////////////////////////////////////////////////@
+
+Show.kefaleaToggle = function(dom) {
+	if (dom.data('open')) {
+		dom.removeData('open').parent().children('.kefalea').empty();
+		return Show;
+	}
+
+	const kefalea = dom.data('open', true).parent().children('.kefalea');
+
+	$.post({
+		'url': 'kefalea.php',
+		'data': {
+			'biblio': dom.children('.biblioId').text(),
+		},
+		'success': function(rsp) {
+			rsp.pop();
+			Show.kefaleaDisplay(dom, rsp);
+		},
+		'fail': function(err) {
+			console.error(err);
+		},
+	});
+
+	return Show;
+}
+
+Show.kefaleaDisplay = function(biblio, data) {
+	const dom = biblio.parent().children('.kefalea');
+	const ml = '40px';
+	const w = (biblio.innerWidth() - parseInt(ml)) + 'px';
+	const col = biblio.css('background-color');
+
+	data.forEach(function(x) {
+		dom.
+		append($('<div>').
+		append($('<div>').
+		addClass('kefaleo').
+		css({
+			'margin-left': ml,
+			'width': w,
+			'background-color': col,
+		}).
+		text(x)).
+		append($('<div>').addClass('edafia')));
+	});
+
+	return Show;
+};
+
+///////////////////////////////////////////////////////////////////////////////@
+
+Show.edafiaToggle = function(dom) {
+	const kefaleo = dom.parent();
+	const edafia = kefaleo.children('.edafia');
+
+	if (dom.data('open')) {
+		dom.removeData('open');
+		edafia.empty();
+		return Show;
+	}
+
+	const biblio = kefaleo.parent().parent().children('.biblioBiblio');
+
+	dom.data('open', true);
+	$.post({
+		'url': 'edafia.php',
+		'data': {
+			'biblio': biblio.children('.biblioId').text(),
+			'kefaleo': dom.text(),
+		},
+		'success': function(rsp) {
+			rsp.pop();
+			Show.edafiaDisplay(dom, rsp);
+		},
+		'fail': function(err) {
+			console.error(err);
+		},
+	});
+
+	return Show;
+}
+
+Show.edafiaDisplay = function(kefaleo, data) {
+	const dom = kefaleo.parent().children('.edafia');
+	const ml = '80px';
+	const w = (kefaleo.innerWidth() - parseInt(ml)) + 'px';
+	const col = kefaleo.css('background-color');
+	const k = kefaleo.text();
+	const b = kefaleo.parent().parent().parent().
+		children('.biblioBiblio').
+		children('.biblioPerigrafi').text();
+
+	data.forEach(function(x) {
+		x.biblio = b;
+		x.kefaleo = k;
+
+		const edafio = new Edafio(x);
+		const edafioDOM = edafio.domGet();
+
+		dom.
+		append(edafioDOM.
+		css({
+			'display': 'block',
+			'margin-left': ml,
+		}));
+	});
+
+	return Show;
+};

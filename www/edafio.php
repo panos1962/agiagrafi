@@ -1,5 +1,5 @@
 <?php
-header('Content-Type: application/json');
+header('Content-Type: application/json; charset=utf-8;');
 require_once("lib/selida.php");
 
 $query = "SELECT MAX(`id`) FROM `edafio`";

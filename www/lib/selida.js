@@ -200,7 +200,7 @@ Biblio.prototype.domGet = function() {
 	dom.append($('<div>').addClass('biblioTitlos').text(this.titlos));
 
 	if (this.xroma)
-	dom.css('background-color', '#' + this.xroma);
+	dom.css('background-color', '#' + this.xroma + 'b0');
 
 	return dom;
 };
