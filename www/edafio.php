@@ -32,5 +32,5 @@ exit(0);
 $row = $result->fetch_object();
 $result->close();
 
-print json_encode($row);
+print Selida::json_string($row);
 ?>

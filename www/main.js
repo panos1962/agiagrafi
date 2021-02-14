@@ -26,6 +26,8 @@ Show.panelSetup = function() {
 		'action': function() {
 			if (Show.autoplay)
 			clearTimeout(Show.timerNext);
+
+			Show.booksIndexOff();
 			Show.edafioStinTixi();
 		},
 	})).
@@ -34,6 +36,7 @@ Show.panelSetup = function() {
 		'title': 'Play',
 		'action': function() {
 			clearTimeout(Show.timerNext);
+			Show.booksIndexOff();
 			Show.autoplay = true;
 			Show.playButtonDOM.css('display', 'none');
 			Show.pauseButtonDOM.css('display', '');
@@ -45,9 +48,30 @@ Show.panelSetup = function() {
 		'title': 'Pause',
 		'action': function() {
 			clearTimeout(Show.timerNext);
+			Show.booksIndexOff();
 			Show.autoplay = false;
 			Show.pauseButtonDOM.css('display', 'none');
 			Show.playButtonDOM.css('display', '');
+		},
+	}));
+
+	Selida.toolbarRightDOM.
+	prepend(Show.panelButton({
+		'img': 'book.svg',
+		'title': 'Books',
+		'action': function() {
+			clearTimeout(Show.timerNext);
+			Show.booksIndexOn();
+			$.post({
+				'url': 'books.php',
+				'success': function(rsp) {
+					rsp.pop();
+					Show.booksIndexDisplay(rsp);
+				},
+				'faile': function(err) {
+					console.error(err);
+				},
+			});
 		},
 	}));
 
@@ -71,6 +95,8 @@ Show.panelButton = function(opts) {
 
 	return button;
 };
+
+///////////////////////////////////////////////////////////////////////////////@
 
 Show.edafioStinTixi = function() {
 	$.post({
@@ -110,3 +136,47 @@ Show.edafioDisplay = function(edafio) {
 
 	return Show;
 };
+
+///////////////////////////////////////////////////////////////////////////////@
+
+Show.booksIndexDisplay = function(data) {
+	let wmax = 0;
+
+	data.forEach(function(x) {
+		const dom = (new Biblio(x)).domGet();
+
+		Selida.ofelimoDOM.append(dom);
+
+		const w = dom.innerWidth();
+
+		if (w > wmax)
+		wmax = w;
+	});
+
+	Selida.ofelimoDOM.
+	children('.biblioBiblio').
+	css({
+		'width': wmax + 'px',
+		'display': 'block',
+	});
+
+	return Show;
+};
+
+Show.booksIndexOn = function() {
+	Selida.ofelimoDOM.empty();
+	Show.booksIndex = true;
+
+	return Show;
+};
+
+Show.booksIndexOff = function() {
+	if (!Show.booksIndex)
+	return Show;
+
+	Selida.ofelimoDOM.empty();
+	Show.booksIndex = false;
+	return Show;
+};
+
+///////////////////////////////////////////////////////////////////////////////@

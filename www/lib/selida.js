@@ -159,22 +159,6 @@ const Edafio = function(edafio) {
 	this[i] = edafio[i];
 };
 
-Edafio.prototype.biblioGet = function() {
-	return this.biblio;
-};
-
-Edafio.prototype.kefaleoGet = function() {
-	return this.kefaleo;
-};
-
-Edafio.prototype.stixosGet = function() {
-	return this.stixos;
-};
-
-Edafio.prototype.kimenoGet = function() {
-	return this.kimeno;
-};
-
 Edafio.prototype.domGet = function() {
 	const dom = $('<div>').addClass('edafioEdafio');
 	const info = $('<div>').addClass('edafioInfo');
@@ -192,6 +176,31 @@ Edafio.prototype.domGet = function() {
 
 	if (this.kimeno)
 	dom.append($('<div>').addClass('edafioKimeno').text(this.kimeno));
+
+	return dom;
+};
+
+///////////////////////////////////////////////////////////////////////////////@
+
+const Biblio = function(biblio) {
+	for (let i in biblio)
+	this[i] = biblio[i];
+};
+
+Biblio.prototype.domGet = function() {
+	const dom = $('<div>').addClass('biblioBiblio');
+
+	if (this.id)
+	dom.append($('<div>').addClass('biblioId').text(this.id));
+
+	if (this.perigrafi)
+	dom.append($('<div>').addClass('biblioPerigrafi').text(this.perigrafi));
+
+	if (this.titlos)
+	dom.append($('<div>').addClass('biblioTitlos').text(this.titlos));
+
+	if (this.xroma)
+	dom.css('background-color', '#' + this.xroma);
 
 	return dom;
 };
