@@ -24,36 +24,6 @@ require_once(BASE_DIR . "/local/conf.php");
 class Selida {
 ///////////////////////////////////////////////////////////////////////////////@
 
-// Η function "eponimi_xrisi" θέτει το session στοιχείο "xristis" στο login
-// name του χρήστη που έχει πραγματοποιήσει επιτυχημένη είσοδο στο σύστημα
-// με τα credentials που έχουν καταχωρηθεί στην database κατά την εγγραφή
-// του χρήστη στο σύστημα, ή μετά από τυχόν αλλαγές που θα πραγματοποιήσει
-// ο χρήστης μέσω της σχετικής σελίδας της εφαρμογής.
-
-public static function eponimi_xrisi($xristis) {
-	$_SESSION["xristis"] = $xristis;
-	return __CLASS__;
-}
-
-// Η function "anonimi_xrisi" αφαιρεί το session στοιχείο "xristis" οπότε
-// τα web προγράμματα της εφαρμογής θεωρούμε ότι λειτουργούν σε ανώνυμη
-// χρήση.
-
-public static function anonimi_xrisi() {
-	unset($_SESSION["xristis"]);
-	return __CLASS__;
-}
-
-public static function is_xristis() {
-	return array_key_exists("xristis", $_SESSION);
-}
-
-public static function no_xristis() {
-	return !self::is_xristis();
-}
-
-///////////////////////////////////////////////////////////////////////////////@
-
 // Η function "css" διαβάζει διευκολύνει την εμφύτευση css αρχείων στη σελίδα.
 // Πρόκειται για wrapper γύρω από την αντίστοιχη HTML εντολή.
 
@@ -88,7 +58,7 @@ public static function head_open() {
 <html>
 <head>
 <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Alegreya&display=swap" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="icon" type="image/png" href="<?php print BASE_URL; ?>/images/agiagrafi.png">
 <?php

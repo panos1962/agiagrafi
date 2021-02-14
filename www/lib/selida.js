@@ -19,6 +19,11 @@ Selida.selidaSetup = function() {
 	ribbonSetup().
 	ofelimoHeightSetup();
 
+	setTimeout(function() {
+		Selida.
+		ofelimoHeightSetup(true);
+	}, 200);
+
 	return Selida;
 };
 
@@ -29,44 +34,14 @@ Selida.toolbarSetup = function() {
 
 	Selida.toolbarDOM.
 	append(Selida.toolbarLeftDOM = $('<div>').attr('id', 'toolbarLeft')).
+	append(Selida.toolbarCenterDOM = $('<div>').attr('id', 'toolbarCenter')).
 	append(Selida.toolbarRightDOM = $('<div>').attr('id', 'toolbarRight'));
 
 	Selida.toolbarLeftDOM.
 	prepend(Selida.arxikiTabDOM = Selida.tabArxiki());
 
-	if (Selida.xristis) {
-		Selida.toolbarRightDOM.
-		append(Selida.tabCreate({
-			'text': Selida.xristis,
-			'href': 'profile',
-		})).
-		append(Selida.tabCreate({
-			'text': 'Έξοδος',
-			'href': function() {
-				$.post({
-					'url': Selida.baseUrl + '/lib/exodos.php',
-					'success': function() {
-						self.location = Selida.baseUrl;
-					},
-					'fail': function(err) {
-						console.error(err);
-					},
-				});
-			},
-		}));
-	}
-
-	else {
-		Selida.toolbarRightDOM.
-		append(Selida.egrafiTabDOM = Selida.tabCreate({
-			'text': 'Εγγραφή',
-			'href': Selida.baseUrl + '/egrafi',
-		})).
-		append(Selida.isodosTabDOM = Selida.tabCreate({
-			'text': 'Είσοδος',
-			'href': Selida.baseUrl + '/isodos',
-		}));
-	}
+	Selida.toolbarCenterDOM.
+	append($('<div>').attr('id', 'titlos').text('Αγία Γραφή'));
 
 	return Selida;
 };
@@ -115,7 +90,7 @@ Selida.ofelimoSetup = function() {
 	appendTo(Selida.bodyDOM);
 
 	Selida.windowDOM.on('resize', function() {
-		Selida.ofelimoHeightSetup();
+		Selida.ofelimoHeightSetup(true);
 	});
 
 	return Selida;
@@ -133,13 +108,14 @@ Selida.ribbonSetup = function() {
 	return Selida;
 };
 
-Selida.ofelimoHeightSetup = function() {
+Selida.ofelimoHeightSetup = function(scroll) {
 	const pad = 1;
 
+	Selida.bodyDOM.css('overflow-y', 'hidden');
 	Selida.ofelimoDOM.css({
 		'padding-top': pad + 'px',
 		'padding-bottom': pad + 'px',
-		'height': 'auto',
+		'min-height': 0,
 	});
 
 	const th = Selida.toolbarDOM.outerHeight();
@@ -147,7 +123,10 @@ Selida.ofelimoHeightSetup = function() {
 	const wh = Selida.windowDOM.height();
 	const oh = wh - th - rh - pad - pad;
 
-	Selida.ofelimoDOM.css('height', oh + 'px');
+	Selida.ofelimoDOM.css('min-height', oh + 'px');
+
+	if (scroll)
+	Selida.bodyDOM.css('overflow-y', '');
 
 	return Selida;
 };
@@ -166,4 +145,45 @@ Selida.widthFix = function(dom, selector) {
 	cl.css('width', cw + 'px');
 
 	return Selida;
+};
+
+///////////////////////////////////////////////////////////////////////////////@
+
+const Edafio = function(edafio) {
+	for (let i in edafio)
+	this[i] = edafio[i];
+};
+
+Edafio.prototype.biblioGet = function() {
+	return this.biblio;
+};
+
+Edafio.prototype.kefaleoGet = function() {
+	return this.kefaleo;
+};
+
+Edafio.prototype.stixosGet = function() {
+	return this.stixos;
+};
+
+Edafio.prototype.kimenoGet = function() {
+	return this.kimeno;
+};
+
+Edafio.prototype.domGet = function() {
+	const dom = $('<div>').addClass('edafioEdafio');
+
+	if (this.biblio)
+	dom.append($('<div>').addClass('edafioBiblio').text(this.biblio));
+
+	if (this.kefaleo)
+	dom.append($('<div>').addClass('edafioKefaleo').text(this.kefaleo));
+
+	if (this.stixos)
+	dom.append($('<div>').addClass('edafioStixos').text(this.stixos));
+
+	if (this.kimeno)
+	dom.append($('<div>').addClass('edafioKimeno').text(this.kimeno));
+
+	return dom;
 };

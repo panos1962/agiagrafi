@@ -8,7 +8,7 @@ COLUMNS TERMINATED BY '\t' (
 );
 
 LOAD DATA LOCAL INFILE 'verses.tsv'
-INTO TABLE `stixos`
+INTO TABLE `edafio`
 COLUMNS TERMINATED BY '\t' (
 	`biblio`,
 	`kefaleo`,

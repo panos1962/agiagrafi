@@ -29,13 +29,18 @@ CREATE TABLE `biblio` (
 COMMENT 'Πίνακας βιβλίων'
 ;
 
-CREATE TABLE `stixos` (
+CREATE TABLE `edafio` (
+	`id`		MEDIUMINT NOT NULL AUTO_INCREMENT COMMENT 'ID βιβλίου',
 	`biblio`	SMALLINT NOT NULL COMMENT 'Αριθμός βιβλίου',
 	`kefaleo`	SMALLINT NOT NULL COMMENT 'Κεφάλαιο',
 	`stixos`	SMALLINT NOT NULL COMMENT 'Στίχος',
 	`kimeno`	VARCHAR(4096) NOT NULL COMMENT 'Κείμενο',
 
 	PRIMARY KEY (
+		`id`
+	) USING BTREE,
+
+	UNIQUE INDEX (
 		`biblio`,
 		`kefaleo`,
 		`stixos`
@@ -46,7 +51,7 @@ CREATE TABLE `stixos` (
 COMMIT WORK
 ;
 
-ALTER TABLE `stixos` ADD FOREIGN KEY (
+ALTER TABLE `edafio` ADD FOREIGN KEY (
 	`biblio`
 ) REFERENCES `biblio` (
 	`id`
