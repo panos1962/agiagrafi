@@ -279,28 +279,30 @@ Show.edafiaToggle = function(dom) {
 	return Show;
 }
 
-Show.edafiaDisplay = function(kefaleo, data) {
-	const dom = kefaleo.parent().children('.edafia');
-	const ml = '80px';
-	const w = (kefaleo.innerWidth() - parseInt(ml)) + 'px';
-	const col = kefaleo.css('background-color');
-	const k = kefaleo.text();
-	const b = kefaleo.parent().parent().parent().
+Show.edafiaDisplay = function(kefaleoDOM, data) {
+	const kefaleoWrapperDOM = kefaleoDOM.parent();
+	const edafiaDOM = kefaleoWrapperDOM.children('.edafia');
+	const marglinleft = '80px';
+	const kefaleo = kefaleoDOM.text();
+	const biblio = kefaleoWrapperDOM.
+		parent().	// λίστα κεφαλαίων
+		parent().	// wrapper βιβλίου
 		children('.biblioBiblio').
-		children('.biblioPerigrafi').text();
+		children('.biblioPerigrafi').
+		text();
 
 	data.forEach(function(x) {
-		x.biblio = b;
-		x.kefaleo = k;
+		x.biblio = biblio;
+		x.kefaleo = kefaleo;
 
 		const edafio = new Edafio(x);
 		const edafioDOM = edafio.domGet();
 
-		dom.
+		edafiaDOM.
 		append(edafioDOM.
 		css({
 			'display': 'block',
-			'margin-left': ml,
+			'margin-left': marglinleft,
 		}));
 	});
 
