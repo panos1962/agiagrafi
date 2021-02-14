@@ -35,7 +35,7 @@ body {
 }
 
 #titlos {
-	font-size: 150%;
+	font-size: 200%;
 	font-weight: 800;
 }
 
@@ -45,10 +45,6 @@ body {
 
 #toolbarRight:after {
 	content: '\200B';
-}
-
-.selidaTitlos {
-	font-weight: 800;
 }
 
 /******************************************************************************/
@@ -81,6 +77,10 @@ body {
 
 #toolbarRight:after {
 	content: '\200B';
+}
+
+#copyright {
+	font-style: italic;
 }
 
 /******************************************************************************/
@@ -136,12 +136,8 @@ body {
 
 .edafioBiblio {
 	display: inline-block;
-}
-
-.edafioBiblio:before {
-	content: 'Βιβλίο';
-	margin-right: 0.2em;
 	font-style: italic;
+	margin-right: 0.2em;
 }
 
 .edafioBiblio:after {
@@ -177,4 +173,5 @@ body {
 
 .edafioKimeno {
 	display: block;
+	font-weight: 500;
 }

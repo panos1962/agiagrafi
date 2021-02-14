@@ -1,5 +1,10 @@
 body {
 	overflow-y: scroll;
+	font-size: 120%
+}
+
+.edafioInfo {
+	text-align: right;
 }
 
 .edafioEdafio {
@@ -15,4 +20,13 @@ body {
 	border-width: 1px;
 	border-color: grey;
 	border-radius: 6px;
+
+	cursor: pointer;
+}
+
+.controlButton {
+	margin: 4px;
+	width: 2em;
+	height: 2em;
+	cursor: pointer;
 }

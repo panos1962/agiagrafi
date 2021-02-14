@@ -15,7 +15,14 @@ $result->close();
 if (!$row)
 exit(0);
 
-$query = "SELECT * FROM `edafio` WHERE `id` = " . random_int(1, intval($row[0]));
+$query = "SELECT " .
+	"`biblio`.`perigrafi` AS `biblio`, " .
+	"`edafio`.`kefaleo`, " .
+	"`edafio`.`stixos`, " .
+	"`edafio`.`kimeno` " .
+	"FROM `edafio`, `biblio` " .
+	"WHERE (`edafio`.`id` = " . random_int(1, intval($row[0])) . ") " .
+	"AND (`edafio`.`biblio` = `biblio`.`id`)";
 
 $result = Selida::query($query);
 

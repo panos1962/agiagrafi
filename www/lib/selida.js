@@ -105,6 +105,11 @@ Selida.ribbonSetup = function() {
 	append(Selida.ribbonLeftDOM = $('<div>').attr('id', 'ribbonLeft')).
 	append(Selida.ribbonRightDOM = $('<div>').attr('id', 'ribbonRight'));
 
+	Selida.ribbonRightDOM.
+	append($('<div>').
+	attr('id', 'copyright').
+	html('Copyright &copy; N.K.F.Papas 2021-'));
+
 	return Selida;
 };
 
@@ -172,15 +177,18 @@ Edafio.prototype.kimenoGet = function() {
 
 Edafio.prototype.domGet = function() {
 	const dom = $('<div>').addClass('edafioEdafio');
+	const info = $('<div>').addClass('edafioInfo');
 
 	if (this.biblio)
-	dom.append($('<div>').addClass('edafioBiblio').text(this.biblio));
+	info.append($('<div>').addClass('edafioBiblio').text(this.biblio));
 
 	if (this.kefaleo)
-	dom.append($('<div>').addClass('edafioKefaleo').text(this.kefaleo));
+	info.append($('<div>').addClass('edafioKefaleo').text(this.kefaleo));
 
 	if (this.stixos)
-	dom.append($('<div>').addClass('edafioStixos').text(this.stixos));
+	info.append($('<div>').addClass('edafioStixos').text(this.stixos));
+
+	dom.append(info);
 
 	if (this.kimeno)
 	dom.append($('<div>').addClass('edafioKimeno').text(this.kimeno));
