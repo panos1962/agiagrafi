@@ -4,6 +4,7 @@ body {
 	margin: 0;
 	height: 100%;
 	font-family: 'Alegreya', serif;
+	background-color: cornsilk;
 }
 
 /******************************************************************************/
@@ -12,7 +13,7 @@ body {
 	display: grid;
 	grid-template-columns: auto auto auto;
 	padding: 4px;
-	background-color: #ffeaae;
+
 	border-style: none none solid none;
 	border-width: 2px;
 	border-color: grey;
@@ -53,7 +54,6 @@ body {
 	display: grid;
 	grid-template-columns: auto auto;
 	padding: 4px;
-	background-color: #ffeaae;
 	border-style: solid none none none;
 	border-width: 2px;
 	border-color: grey;
@@ -104,7 +104,6 @@ body {
 
 #ofelimo {
 	position: relative;
-	background-color: #f5fdfd;
 }
 
 /******************************************************************************/
