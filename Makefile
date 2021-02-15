@@ -27,3 +27,6 @@ dbrefresh:
 
 test:
 	bash local/testwww.sh
+
+cleanup:
+	@:
