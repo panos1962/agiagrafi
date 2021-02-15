@@ -108,7 +108,7 @@ Selida.ribbonSetup = function() {
 	Selida.ribbonRightDOM.
 	append($('<div>').
 	attr('id', 'copyright').
-	html('Copyright &copy; N.K.F.Papas 2021-'));
+	html('Copyright &copy; N.K.F.Papas 2021&ndash;'));
 
 	return Selida;
 };
@@ -200,7 +200,7 @@ Biblio.prototype.domGet = function() {
 	dom.append($('<div>').addClass('biblioTitlos').text(this.titlos));
 
 	if (this.xroma)
-	dom.css('background-color', '#' + this.xroma + 'b0');
+	dom.css('background-color', '#' + this.xroma + '70');
 
 	return dom;
 };
