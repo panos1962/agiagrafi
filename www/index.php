@@ -6,7 +6,7 @@ head_open()::
 titlos("Αγία Γραφή")::
 body_open();
 
-if ($_GET["books"]) {
+if ($_REQUEST["books"]) {
 ?>
 <script>
 Show.booksAuto = true;

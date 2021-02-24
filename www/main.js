@@ -34,7 +34,6 @@ Selida.init = function() {
 
 	else
 	Show.edafioStinTixi();
-	
 };
 
 Show.panelSetup = function() {
