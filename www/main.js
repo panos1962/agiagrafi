@@ -28,7 +28,13 @@ Selida.init = function() {
 
 		Show.edafiaToggle($(this));
 	});
+
+	if (Show.booksAuto)
+	Show.booksButtonDOM.trigger('click');
+
+	else
 	Show.edafioStinTixi();
+	
 };
 
 Show.panelSetup = function() {
@@ -69,7 +75,7 @@ Show.panelSetup = function() {
 	}));
 
 	Selida.toolbarRightDOM.
-	prepend(Show.panelButton({
+	prepend(Show.booksButtonDOM = Show.panelButton({
 		'img': 'book.svg',
 		'title': 'Books',
 		'action': function() {
